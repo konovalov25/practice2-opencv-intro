@@ -26,17 +26,20 @@ class Application
         WindowState state;
         cv::Rect onButtonPlace;
         cv::Rect offButtonPlace;
+		cv::Rect saveButtonPlace;
+		bool saveState;
     };
     int parseArguments(int argc, const char **argv, Parameters &params);
     int getFrame(const std::string &fileName, cv::Mat& src);
-    int processFrame(const cv::Mat& src, cv::Mat& dst);
+    int processFrame(const cv::Mat& src, cv::Mat& dst, int& framex, int& framey, int& ksize);
     int showFrame(const std::string &caption, 
-                  const cv::Mat& src, cv::Mat& dst);
+                  const cv::Mat& src, cv::Mat& dst, int& framex, int& framey, int& ksize);
     friend void onButtonsOnOffClick(int eventId, int x, int y, 
                                     int flags, void *userData);
     Application() 
     { 
         guiState.state = OnFilter;
+		guiState.saveState = false;
     };
 
  private:
